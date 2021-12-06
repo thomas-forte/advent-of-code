@@ -1,5 +1,6 @@
 x = 0
 y = 0
+aim = 0
 
 def process_command(command):
     command = command.strip().split(' ')
@@ -12,11 +13,12 @@ commands = list(map(process_command, lines))
 
 for command in commands:
     if command[0] == 'up':
-        y = y - command[1]
+        aim = aim - command[1]
     elif command[0] == 'down':
-        y = y + command[1]
+        aim = aim + command[1]
     elif command[0] == 'forward':
         x = x + command[1]
+        y = y + (aim  * command[1])
 
 
 print(f'X: {x}')
