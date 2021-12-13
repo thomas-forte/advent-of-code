@@ -43,7 +43,6 @@ for line in data[2:]:
 pick_index = -1
 last_board_winner = False
 while not last_board_winner and pick_index < len(pickable_numbers):
-    print(f'boards left: {len(boards)}')
     pick_index = pick_index + 1
 
     boards_that_won = []
@@ -60,7 +59,6 @@ while not last_board_winner and pick_index < len(pickable_numbers):
         last_board_winner = True
     else:
         boards_that_won.reverse()
-        print(f'removing: {boards_that_won}')
         for board_that_won in boards_that_won:
             boards.pop(board_that_won)
             marked_boards.pop(board_that_won)
