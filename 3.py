@@ -12,7 +12,6 @@ with open('3.txt') as f:
 number_length = len(lines[0].strip())
 total_numbers = len(lines)
 
-print(range(number_length))
 for x in range(number_length):
     zero_count = 0
     for line in lines:
