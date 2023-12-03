@@ -3,6 +3,7 @@ Advent of Code
 year: 2023
 part: 1
 """
+from functools import reduce
 
 
 def part_1(input_lines):
@@ -42,5 +43,30 @@ def part_1(input_lines):
 
 
 def part_2(input_lines):
+    """
+    Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one,
+    two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+    """
+    power_sum = 0
 
-    return 0
+    for line in input_lines:
+        game_data = line.split(": ")[-1]
+
+        min_bag = {
+            "red": 0,
+            "green": 0,
+            "blue": 0,
+        }
+
+        picks = game_data.split("; ")
+        for pick in picks:
+            pick_data = pick.split(", ")
+            for pick_datum in pick_data:
+                count, color = pick_datum.split(" ")
+
+                if min_bag[color] < int(count):
+                    min_bag[color] = int(count)
+
+        power_sum += reduce(lambda a, b: a * b, min_bag.values())
+
+    return power_sum
