@@ -1,3 +1,5 @@
+"""Entrypoint for running modules."""
+
 import argparse
 from datetime import datetime
 from importlib import import_module
@@ -15,17 +17,36 @@ if args.year is None:
     args.year = default = datetime.now().year
 
 
-def run_day(year, day, filename="input.txt"):
+def run_day(year, day):
+    """
+    Imports specified days module, opens and reads inputs, then runs part_1 and part_2
+    """
     module = import_module(f"{year}.{day}.main")
 
-    with open(f"{year}/{day}/{filename}") as f:
-        input = f.read().splitlines()
+    with open(f"{year}/{day}/input.txt", encoding="utf-8") as f:
+        split_lines = f.read().splitlines()
 
-    print(f"Part 1: {module.part_1(input)}")
-    print(f"Part 2: {module.part_2(input)}")
+    print(f"Part 1: {module.part_1(split_lines)}")
+    print(f"Part 2: {module.part_2(split_lines)}")
+
+
+def test_day(year, day):
+    """
+    Imports specified days module, opens and reads inputs, then runs part_1 and part_2
+    """
+    module = import_module(f"{year}.{day}.main")
+
+    with open(f"{year}/{day}/test-1.txt", encoding="utf-8") as f:
+        split_lines_1 = f.read().splitlines()
+
+    with open(f"{year}/{day}/test-2.txt", encoding="utf-8") as f:
+        split_lines_2 = f.read().splitlines()
+
+    print(f"Part 1: {module.part_1(split_lines_1)}")
+    print(f"Part 2: {module.part_2(split_lines_2)}")
 
 
 if args.test:
-    run_day(args.year, args.day, "test.txt")
+    test_day(args.year, args.day)
 else:
     run_day(args.year, args.day)
