@@ -1,7 +1,7 @@
 """
 Advent of Code
 year: 2023
-part: 1
+part: 2
 """
 from functools import reduce
 
