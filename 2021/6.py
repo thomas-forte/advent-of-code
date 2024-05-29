@@ -15,7 +15,8 @@ def process_day(fishies):
 
     return new_fishies
 
-with open('6.txt') as f:
+
+with open("6.txt") as f:
     data = f.read().splitlines()
 
 fishies = {
@@ -30,7 +31,7 @@ fishies = {
     8: 0,
 }
 
-fish_data = data[0].split(',')
+fish_data = data[0].split(",")
 
 for fish in fish_data:
     fish = int(fish)
@@ -39,4 +40,4 @@ for fish in fish_data:
 for day in range(80):
     fishies = process_day(fishies)
 
-print(f'After 80 days the amount of fish is: {sum(fishies.values())}')
+print(f"After 80 days the amount of fish is: {sum(fishies.values())}")
