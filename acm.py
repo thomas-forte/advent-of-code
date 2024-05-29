@@ -13,7 +13,7 @@ now = datetime.now()
 parser.add_argument(
     "day",
     type=int,
-    choices=range(1, 25),
+    choices=range(1, 26),
     metavar="day",
     help="Select the day of advent to run",
 )
@@ -22,7 +22,7 @@ parser.add_argument(
     "year",
     nargs="?",
     type=int,
-    choices=range(2021, now.year),
+    choices=range(2021, now.year + 1),
     metavar="year",
     help="Optional, select the year of advent to run. The current year is the default.",
 )
@@ -69,7 +69,23 @@ def _get_module(year, day):
         return module
 
     except ModuleNotFoundError:
-        print(f"No module found at: {year}/{day}")
+        print(f"No module found at: ./{year}/{day}/main.py")
+        print("Exiting")
+        sys.exit(1)
+        return None
+
+
+def _get_file(year, day, filename):
+    """
+    Loads file
+    """
+    try:
+        with open(f"{year}/{day}/{filename}", encoding="utf-8") as f:
+            split_lines = f.read().splitlines()
+        return split_lines
+
+    except FileNotFoundError:
+        print(f"File not found at: ./{year}/{day}/{filename}")
         print("Exiting")
         sys.exit(1)
         return None
@@ -81,11 +97,10 @@ def run_day(year, day):
     """
     module = _get_module(year, day)
 
-    with open(f"{year}/{day}/input.txt", encoding="utf-8") as f:
-        split_lines = f.read().splitlines()
+    data = _get_file(year, day, "input.txt")
 
-    print(f"Part 1: {module.part_1(split_lines)}")
-    print(f"Part 2: {module.part_2(split_lines)}")
+    print(f"Part 1: {module.part_1(data)}")
+    print(f"Part 2: {module.part_2(data)}")
 
 
 def test_day(year, day):
@@ -94,14 +109,12 @@ def test_day(year, day):
     """
     module = _get_module(year, day)
 
-    with open(f"{year}/{day}/test-1.txt", encoding="utf-8") as f:
-        split_lines_1 = f.read().splitlines()
+    data_1 = _get_file(year, day, "test-1.txt")
 
-    with open(f"{year}/{day}/test-2.txt", encoding="utf-8") as f:
-        split_lines_2 = f.read().splitlines()
+    data_2 = _get_file(year, day, "test-2.txt")
 
-    print(f"Part 1: {module.part_1(split_lines_1)}")
-    print(f"Part 2: {module.part_2(split_lines_2)}")
+    print(f"Part 1: {module.part_1(data_1)}")
+    print(f"Part 2: {module.part_2(data_2)}")
 
 
 if args.test:
