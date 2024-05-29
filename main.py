@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("day", type=int, help="Select just one day to run")
 parser.add_argument("year", nargs="?", type=int, help="Select just one day to run")
 parser.add_argument("-t", "--test", action="store_true", help="Run tests instead of input")
+parser.add_argument("-d", "--debug", action="store_true", help="Include error outputs for test cases")
 
 args = parser.parse_args()
 

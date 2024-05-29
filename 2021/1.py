@@ -1,4 +1,4 @@
-with open('1.txt') as f:
+with open("1.txt") as f:
     lines = f.readlines()
 
 numbers = list(map(int, lines))
@@ -10,13 +10,13 @@ print(numbers)
 
 for number in numbers:
     if prev is None:
-        print(f'{number} (N/A - no previous measurement)')
+        print(f"{number} (N/A - no previous measurement)")
     elif number > prev:
         increases += 1
-        print(f'{number} (increased)')
+        print(f"{number} (increased)")
     else:
-        print(f'{number} (decreased)')
+        print(f"{number} (decreased)")
 
     prev = number
 
-print(f'There were {increases} measurements that are larger than the previous measurement.')
+print(f"There were {increases} measurements that are larger than the previous measurement.")
