@@ -13,32 +13,29 @@ def part_1(input_lines):
     The X/Y values are always 1-3 digits long.
     """
 
-    sum_of_multiples = 0
     mul_search = re.compile(r"mul\(([0-9]{1,3}),([0-9]{1,3})\)")
 
     merged_data = "".join([line.strip() for line in input_lines])
 
     results = mul_search.findall(merged_data)
 
-    sum_of_multiples += sum(int(x) * int(y) for x, y in results)
+    sum_of_multiples = sum(int(x) * int(y) for x, y in results)
 
     return sum_of_multiples
 
 
-# def part_2(input_lines):
-#     """
-#     wtf
-#     """
+def part_2(input_lines):
+    """
+    wtf
+    """
 
-#     sum_of_multiples = 0
+    merged_data = "".join([line.strip() for line in input_lines])
 
-#     merged_data = "".join([line.strip() for line in input_lines])
+    dirty_processing = [segment.split("don't()")[0] for segment in merged_data.split("do()")]
 
-#     dirty_processing = [segment.split("don't()")[0] for segment in merged_data.split("do()")]
+    sum_of_multiples = part_1(["".join(dirty_processing)])
 
-#     sum_of_multiples += part_1(["".join(dirty_processing)])
-
-#     return sum_of_multiples
+    return sum_of_multiples
 
 
 # 82868252 WRONG
